@@ -16,7 +16,7 @@ BEGIN
 	"InputData".Gt2IsClosed := "Prox2";
 	"InputData".Gt3IsClosed := "Prox3";
 	
-	// Stato porta 1
+	// Stato porta 1 - Messaggio per lettura semplificata
 	IF "InputData".Gt1IsClosed THEN
 	    #Msg := 'Porta 1 chiusa';
 	ELSE
