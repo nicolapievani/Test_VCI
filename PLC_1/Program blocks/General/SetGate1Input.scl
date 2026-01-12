@@ -6,7 +6,7 @@ VERSION : 0.1
 //Carico lo stato delle variabili porte
    VAR_OUTPUT 
       GtIsClosed : Bool;
-      Msg : String;
+      Msg : String := '';
    END_VAR
 
 
@@ -15,24 +15,30 @@ BEGIN
 	"InputData".Gt1IsClosed := "Prox1";
 	"InputData".Gt2IsClosed := "Prox2";
 	"InputData".Gt3IsClosed := "Prox3";
-	
+	#Msg := 'Waiting Status';
 	// Stato porta 1 - Messaggio per lettura semplificata
 	IF "InputData".Gt1IsClosed THEN
 	    #Msg := 'Porta 1 chiusa';
+	    "Appo".Gt1St.%X0 := 1;
 	ELSE
 	    #Msg := 'Porta 1 aperta';
+	    "Appo".Gt1St.%X0 := 0;
 	END_IF;
 	// Stato porta 2
 	IF "InputData".Gt2IsClosed THEN
-	    #Msg := CONCAT(IN1:=#Msg, IN2:=' - Porta 2 chiusa');
+	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 2 chiusa');
+	    "Appo".Gt1St.%X1 := 1;
 	ELSE
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 2 aperta');
+	    "Appo".Gt1St.%X1 := 0;
 	END_IF;
 	// Stato porta 3
 	IF "InputData".Gt3IsClosed THEN
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 3 chiusa');
+	    "Appo".Gt1St.%X2 := 1;
 	ELSE
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 3 aperta');
+	    //"Appo".Gt1St.%X2 := 0;
 	END_IF;
 	
 	// Cumulativo
