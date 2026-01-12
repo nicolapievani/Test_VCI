@@ -1,0 +1,43 @@
+﻿FUNCTION_BLOCK "SetGate1Input"
+TITLE = Imposta stato delle variabili relative alle porte
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Nicola
+VERSION : 0.1
+//Carico lo stato delle variabili porte
+   VAR_OUTPUT 
+      GtIsClosed : Bool;
+      Msg : String;
+   END_VAR
+
+
+BEGIN
+	// Carico i dati del letti dalle TAG nel DB 
+	"InputData".Gt1IsClosed := "Prox1";
+	"InputData".Gt2IsClosed := "Prox2";
+	"InputData".Gt3IsClosed := "Prox3";
+	
+	// Stato porta 1
+	IF "InputData".Gt1IsClosed THEN
+	    #Msg := 'Porta 1 chiusa';
+	ELSE
+	    #Msg := 'Porta 1 aperta';
+	END_IF;
+	// Stato porta 2
+	IF "InputData".Gt2IsClosed THEN
+	    #Msg := CONCAT(IN1:=#Msg, IN2:=' - Porta 2 chiusa');
+	ELSE
+	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 2 aperta');
+	END_IF;
+	// Stato porta 3
+	IF "InputData".Gt3IsClosed THEN
+	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 3 chiusa');
+	ELSE
+	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 3 aperta');
+	END_IF;
+	
+	// Cumulativo
+	#GtIsClosed := "InputData".Gt1IsClosed AND "InputData".Gt2IsClosed AND "InputData".Gt3IsClosed;
+	
+	
+END_FUNCTION_BLOCK
+
