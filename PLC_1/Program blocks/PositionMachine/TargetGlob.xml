@@ -6,7 +6,7 @@
       <HeaderAuthor>Nicola</HeaderAuthor>
       <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
   <Section Name="Static">
-    <Member Name="Pos" Datatype="Bool" />
+    <Member Name="Pos" Datatype="&quot;Position&quot;" />
   </Section>
 </Sections></Interface>
       <MemoryLayout>Optimized</MemoryLayout>

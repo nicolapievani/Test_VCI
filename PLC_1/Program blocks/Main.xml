@@ -40,7 +40,65 @@
       </MultilingualText>
       <SW.Blocks.CompileUnit ID="3" CompositionName="CompileUnits">
         <AttributeList>
-          <NetworkSource />
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="TargetGlob" />
+        <Component Name="Pos" />
+      </Symbol>
+    </Access>
+    <Call UId="22">
+      <CallInfo Name="SetGate1Input" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="23">
+          <Component Name="INSTSetGate1Input_DB" />
+        </Instance>
+        <Parameter Name="GtIsClosed" Section="Output" Type="Bool" />
+        <Parameter Name="Msg" Section="Output" Type="String" />
+      </CallInfo>
+    </Call>
+    <Call UId="24">
+      <CallInfo Name="SetStartPosition" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="25">
+          <Component Name="INSTSetStartPosition_DB" />
+        </Instance>
+        <Parameter Name="TgtGlobPos" Section="Input" Type="&quot;Position&quot;" />
+        <Parameter Name="Msg" Section="Output" Type="String" />
+        <Parameter Name="IncrementalPos" Section="Output" Type="&quot;Position&quot;" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="30">
+      <Powerrail />
+      <NameCon UId="22" Name="en" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="22" Name="eno" />
+      <NameCon UId="24" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <NameCon UId="22" Name="GtIsClosed" />
+      <OpenCon UId="26" />
+    </Wire>
+    <Wire UId="33">
+      <NameCon UId="22" Name="Msg" />
+      <OpenCon UId="27" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="21" />
+      <NameCon UId="24" Name="TgtGlobPos" />
+    </Wire>
+    <Wire UId="35">
+      <NameCon UId="24" Name="Msg" />
+      <OpenCon UId="28" />
+    </Wire>
+    <Wire UId="36">
+      <NameCon UId="24" Name="IncrementalPos" />
+      <OpenCon UId="29" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
           <ProgrammingLanguage>LAD</ProgrammingLanguage>
         </AttributeList>
         <ObjectList>
@@ -66,9 +124,37 @@
           </MultilingualText>
         </ObjectList>
       </SW.Blocks.CompileUnit>
-      <MultilingualText ID="8" CompositionName="Title">
+      <SW.Blocks.CompileUnit ID="8" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource />
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
         <ObjectList>
-          <MultilingualTextItem ID="9" CompositionName="Items">
+          <MultilingualText ID="9" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="D" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="E" CompositionName="Items">
             <AttributeList>
               <Culture>en-US</Culture>
               <Text>"Main Program Sweep (Cycle)"</Text>
