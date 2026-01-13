@@ -4,6 +4,10 @@ TITLE = Imposta stato delle variabili relative alle porte
 AUTHOR : Nicola
 VERSION : 0.1
 //Carico lo stato delle variabili porte
+   VAR_INPUT 
+      Ind : Int;
+   END_VAR
+
    VAR_OUTPUT 
       GtIsClosed : Bool;
       Msg : String := '';
@@ -44,6 +48,8 @@ BEGIN
 	// Cumulativo
 	#GtIsClosed := "InputData".Gt1IsClosed AND "InputData".Gt2IsClosed AND "InputData".Gt3IsClosed;
 	
+	// Salvo nel vettore nella posizione specificata il valore opposto a quello correntemente salvato
+	"Appo".VtInt[#Ind] := NOT "Appo".VtInt[#Ind];
 	
 END_FUNCTION_BLOCK
 

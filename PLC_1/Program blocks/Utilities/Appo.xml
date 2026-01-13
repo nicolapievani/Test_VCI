@@ -6,6 +6,7 @@
       <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
   <Section Name="Static">
     <Member Name="Gt1St" Datatype="Byte" />
+    <Member Name="VtInt" Datatype="Array[0..10] of Bool" />
   </Section>
 </Sections></Interface>
       <MemoryLayout>Optimized</MemoryLayout>
