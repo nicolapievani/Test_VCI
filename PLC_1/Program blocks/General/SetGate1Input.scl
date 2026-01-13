@@ -11,12 +11,13 @@ VERSION : 0.1
 
 
 BEGIN
-	// Carico i dati del letti dalle TAG nel DB 
+	// Carico i dati letti dalle TAG nel DB 
 	"InputData".Gt1IsClosed := "Prox1";
 	"InputData".Gt2IsClosed := "Prox2";
 	"InputData".Gt3IsClosed := "Prox3";
 	#Msg := 'Waiting Status';
-	// Stato porta 1 - Messaggio per lettura semplificata
+	
+	// Stato porta 1 - Salvo lo stato gate come bit
 	IF "InputData".Gt1IsClosed THEN
 	    #Msg := 'Porta 1 chiusa';
 	    "Appo".Gt1St.%X0 := 1;
@@ -24,7 +25,8 @@ BEGIN
 	    #Msg := 'Porta 1 aperta';
 	    "Appo".Gt1St.%X0 := 0;
 	END_IF;
-	// Stato porta 2
+	
+	// Stato porta 2 - Salvo lo stato gate come bit
 	IF "InputData".Gt2IsClosed THEN
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 2 chiusa');
 	    "Appo".Gt1St.%X1 := 1;
@@ -32,7 +34,8 @@ BEGIN
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 2 aperta');
 	    "Appo".Gt1St.%X1 := 0;
 	END_IF;
-	// Stato porta 3
+	
+	// Stato porta 3 - Salvo lo stato gate come bit
 	IF "InputData".Gt3IsClosed THEN
 	    #Msg := CONCAT(IN1 := #Msg, IN2 := ' - Porta 3 chiusa');
 	    "Appo".Gt1St.%X2 := 1;
@@ -43,7 +46,7 @@ BEGIN
 	
 	// Cumulativo
 	#GtIsClosed := "InputData".Gt1IsClosed AND "InputData".Gt2IsClosed AND "InputData".Gt3IsClosed;
-	
+	    
 	
 END_FUNCTION_BLOCK
 
