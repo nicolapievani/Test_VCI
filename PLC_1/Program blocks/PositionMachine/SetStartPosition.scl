@@ -1,0 +1,56 @@
+﻿FUNCTION_BLOCK "SetStartPosition"
+TITLE = Prepara i dati per il posizionamento
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : Nicola
+VERSION : 0.1
+//Imposto le posizioni che devono essere raggiunte per poter iniziare una lavorazione
+   VAR_INPUT 
+      TgtGlobPos : "Position";   // Valore di posizione targe i coordinate globali
+   END_VAR
+
+   VAR_OUTPUT 
+      IncrementalPos : "Position";
+   END_VAR
+
+   VAR_IN_OUT 
+      Msg : String;
+   END_VAR
+
+   VAR 
+      Ok : Bool;
+   END_VAR
+
+
+BEGIN
+	REGION "Verifica posizione nei limiti macchina"
+	    
+	    // Verifcìico asse X
+	    IF #TgtGlobPos.LinAxis.X < "CurrStroke".Str.LinaAxis.X.Max AND #TgtGlobPos.LinAxis.X > "CurrStroke".Str.LinaAxis.X.Min THEN
+	        #Ok := TRUE;
+	    END_IF;
+	    
+	    // Verifcìico asse Y
+	    IF #TgtGlobPos.LinAxis.Y < "CurrStroke".Str.LinaAxis.Y.Max AND #TgtGlobPos.LinAxis.Y > "CurrStroke".Str.LinaAxis.Y.Min THEN
+	        #Ok := TRUE;
+	    END_IF;
+	    
+	    // Verifcìico asse Z
+	    IF #TgtGlobPos.LinAxis.Z < "CurrStroke".Str.LinaAxis.Z.Max AND #TgtGlobPos.LinAxis.Z > "CurrStroke".Str.LinaAxis.Z.Min THEN
+	        #Ok := TRUE;
+	    END_IF;
+	    
+	END_REGION
+	
+	REGION "Calcolo valore incrementale"
+	    
+	    // Se la verifica dei limiti corsa è corretta allora calcolo il valore incrementale
+	    IF #Ok THEN
+	        #IncrementalPos.LinAxis.X := #TgtGlobPos.LinAxis.X - "CurrGlob".Pos.LinAxis.X;
+	        #IncrementalPos.LinAxis.Y := #TgtGlobPos.LinAxis.Y - "CurrGlob".Pos.LinAxis.Y;
+	        #IncrementalPos.LinAxis.Z := #TgtGlobPos.LinAxis.X - "CurrGlob".Pos.LinAxis.Z;
+	    END_IF;
+	        
+	END_REGION
+	
+END_FUNCTION_BLOCK
+
